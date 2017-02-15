@@ -48,4 +48,4 @@ Close the msys terminal and reopen it, then cd into the CEngine directory.
 
 NOTE: The make command will build the ADSM executables but then stop on an error when it reaches the doc/diagrams directory (the free diagramming tool Dia is not available as a precompiled MSYS2 package).
 
-The compiled output will be 'main_loop/adsm.exe'. You won't be able to run it in place as it needs to be in the same directory as some dependent dll files. Take the 'adsm.exe' file in and put it into 'ADSM/bin' and rename it to 'adsm_simulation.exe'.
+The compiled output will be 'main_loop/adsm.exe'. You won't be able to run it in place as it needs to be in the same directory as some dependent dll files (which are in the main ADSM repo already). Take the 'CEngine/main_loop/adsm.exe' file and put it into 'ADSM/bin' and rename it to 'adsm_simulation.exe'.
