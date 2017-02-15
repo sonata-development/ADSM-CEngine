@@ -40,8 +40,7 @@ In your favorite text editor, add the following lines to ~/.bash_profile:
     
 NOTE: The order of directories for LDFLAGS is important. There are conflicting copies of GLib in /usr/lib and /mingw64/lib, and you want the one in /usr/lib to be found first, or you will get obscure linking errors in later steps.
 
-Close the msys terminal.  
-Open the mingw64 terminal (C:\msys2\mingw64.exe), then cd into the CEngine directory.
+Close the msys terminal and reopen it, then cd into the CEngine directory.
 
 `sh bootstrap`  
 `./configure --disable-debug`  
