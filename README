@@ -1,2 +1,52 @@
 If you are installing this program on a Unix based system such as Linux, please
 see the file INSTALL for full instructions.
+
+Compile Instructions for Windows 7 - 10
+
+Download and install msys2: http://repo.msys2.org/distrib/x86_64/msys2-x86_64-20161025.exe
+
+NOTE: the home direcotry when in the msys shell shows as '/home/username'; this directory is located at 'C:\msys2\home\username'.
+
+Open the msys terminal and run `pacman -Syu`. Close the terminal, reopen it and run the following commands:
+
+`pacman -Su`  
+`pacman -S pkg-config autoconf automake-wrapper gcc make bison python glib2-devel mingw-w64-x86_64-gd mingw-w64-x86_64-gsl libsqlite-devel mingw-w64-x86_64-shapelib mingw-w64-x86_64-json-glib`  
+
+Download the General Polygon Clipper Library (GPC): http://www.cs.man.ac.uk/~toby/gpc/assets/gpc232-release.zip
+
+Unpack gpc (easiest if you unpack into your msys home directory 'C:\msys2\home\username\'), open the msys terminal and cd into the unpacked directory.
+
+`mkdir /usr/local/lib`  
+`mkdir /usr/local/include`  
+`mkdir /usr/local/include/gpcl/`  
+`mkdir /share`  
+`mkdir /share/aclocal/`  
+`mkdir /mingw64`  
+`mkdir /mingw64/share`  
+`mkdir /mingw64/share/aclocal`  
+`cc -c -o gpc.o gpc.c`  
+`ar r libgpcl.a gpc.o`  
+`cp libgpcl.a /usr/local/lib/`  
+`cp gpc.h /usr/local/include/`  
+`mkdir /usr/local/include/gpcl/`  
+`cp gpc.h /usr/local/include/gpcl/`  
+
+In your favorite text editor, add the following lines to ~/.bash_profile:
+
+    export PATH=$PATH:/mingw64/bin
+    export CFLAGS='-I/usr/local/include -I/mingw64/include'
+    export LDFLAGS='-L/usr/local/lib -L/usr/lib -L/mingw64/lib'
+    export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/mingw64/lib/pkgconfig
+    
+NOTE: The order of directories for LDFLAGS is important. There are conflicting copies of GLib in /usr/lib and /mingw64/lib, and you want the one in /usr/lib to be found first, or you will get obscure linking errors in later steps.
+
+Close the msys terminal.  
+Open the mingw64 terminal (C:\msys2\mingw64.exe), then cd into the CEngine directory.
+
+`sh bootstrap`  
+`./configure --disable-debug`  
+`make`  
+
+NOTE: The make command will build the ADSM executables but then stop on an error when it reaches the doc/diagrams directory (the free diagramming tool Dia is not available as a precompiled MSYS2 package).
+
+The compiled output will be 'main_loop/adsm.exe'. You won't be able to run it in place as it needs to be in the same directory as some dependent dll files. Take the 'adsm.exe' file in and put it into 'ADSM/bin' and rename it to 'adsm_simulation.exe'.
