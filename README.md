@@ -1,10 +1,10 @@
-#ADSM-CEngine (Animal Disease Spread Model-CEngine)
+# ADSM-CEngine (Animal Disease Spread Model-CEngine)
 ADSM is an application with Desktop and Web Based GUI for creating a simulation model to assist decision making and education in evaluating animal disease incursions.
 This CEngine is the C code that runs the stochastic modeling simulation in the background.
 Scenario parameters are sent to the CEngine via a Scenario SQLite file.
 Results are written directly back to the same SQLite file, and supplemental result files are written to a directory alongside the SQLite scenario file.
 
-##Compile CEngine Executable
+## Compile CEngine Executable
 The CEngine needs to be compiled for testing and deployment both.
 
 Windows is the primary target currently as the ADSM GUI application is mostly used on Windows.
@@ -14,7 +14,7 @@ Compiling on Linux isn't fully supported yet for two reasons:
 1. The compile output of the CEngine compile process isn't yet deploy friendly. It isn't statically compiled and as such has a lot of dependent files that aren't easily distributed.
 2. The ADSM GUI application compile process requires manual intervention on Linux to get the output files collected into the proper folders for the executable to find them. This second reason doesn't matter when you are talking about doing a deployment on a Web Server as the ADMS GUI application does not need to be compiled for that sort of deployment.
 
-###x86-64 Windows 7 - 10
+### x86-64 Windows 7 - 10
 Exactly follow these steps to compile the CEngine Executable for Windows.
 
 1. Download and install msys2: http://repo.msys2.org/distrib/x86_64/msys2-x86_64-20161025.exe  
@@ -55,7 +55,7 @@ Exactly follow these steps to compile the CEngine Executable for Windows.
 1. Take the './main_loop/adsm.exe' file and put it into ADSM GUI application in 'ADSM/bin/' and rename it to 'adsm_simulation.exe'.
 1. If once in the 'ADSM/bin' folder it won't run due to a missing dependency, look for the proper dll in your msys installation folders and move it to be alongside the 'adsm_simulation.exe' file in the 'ADSM/bin' folder
 
-###x86-64 Debian Linux (Ubuntu preferred)
+### x86-64 Debian Linux (Ubuntu preferred)
 Follow these steps to compile the CEngine Executable for Linux.
 
 1. Open a terminal
