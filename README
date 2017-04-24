@@ -2,7 +2,7 @@
 ADSM is an application with Desktop and Web Based Frontend GUI for creating a simulation model to assist decision making and education in evaluating animal disease incursions.
 This CEngine is the C code that runs the stochastic modeling simulation in the background.
 Scenario parameters are sent to the CEngine via a Scenario SQLite file.
-Results are written directly back to the same SQLite file, and supplemental result files are written to a directory alongside the SQLite scenario file.
+Results are written to the stdout, and supplemental result files are written to a directory alongside the SQLite scenario file.
 
 ## Compile CEngine Executable
 The CEngine needs to be compiled for testing and deployment both.
