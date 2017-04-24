@@ -57,6 +57,10 @@ Exactly follow these steps to compile the CEngine Executable for Windows.
 1. Open the msys terminal.
 1. cd into the CEngine directory.
 1. `sh bootstrap`  
+   1. If you get an error like "' is already registered with AC_CONFIG_FILES.", this means that DOS/Windows style line endings have been introduced into the 'configure.ac' file.
+   1. Open 'configure.ac' in Notepad++.
+   1. Click through Edit -> EOL Conversion -> UNIX/OSX Format.
+   1. Save the file and run command again.
 1. `./configure --disable-debug`  
 1. `make`  
    * The make command will build the ADSM executables but then stop on an error when it reaches the doc/diagrams directory (the free diagramming tool Dia is not available as a precompiled MSYS2 package)
