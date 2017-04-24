@@ -14,6 +14,11 @@ Compiling on Linux isn't fully supported yet for two reasons:
 1. The compile output of the CEngine compile process isn't yet deploy friendly. It isn't statically compiled and as such has a lot of dependent files that aren't easily distributed.
 2. The ADSM GUI application compile process requires manual intervention on Linux to get the output files collected into the proper folders for the executable to find them. This second reason doesn't matter when you are talking about doing a deployment on a Web Server as the ADMS GUI application does not need to be compiled for that sort of deployment.
 
+To compile ADSM-CEngine, you will need two system packages installed already: Python3.4.x (x64) and Git (on the system path).
+
+Python: https://www.python.org/downloads/release/python-343/
+Git: https://git-scm.com/downloads
+
 ### x86-64 Windows 7 - 10
 Exactly follow these steps to compile the CEngine Executable for Windows.
 
@@ -44,7 +49,12 @@ Exactly follow these steps to compile the CEngine Executable for Windows.
    export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/mingw64/lib/pkgconfig
    
    ```
-1. Close the msys terminal and reopen it
+1. Close the msys terminal.
+1. Clone the ADSM-CEngine project to your desired directory:
+   1. Open a Command Window in the directory you keep your projects (DRIVE:\\\\path\\to\\projects)
+   1. `git clone git@github.com:NAVADMC/ADSM-CEngine.git`
+1. Close the Command Window.
+1. Open the msys terminal.
 1. cd into the CEngine directory.
 1. `sh bootstrap`  
 1. `./configure --disable-debug`  
@@ -76,7 +86,8 @@ Follow these steps to compile the CEngine Executable for Linux.
 1. `cp gpc.h /usr/local/include/gpcl/` 
 1. `export CFLAGS='-I/usr/local/include'`
 1. `export LDFLAGS='-L/usr/local/lib -L/usr/lib'`
-1. `cd /path/to/ADSM-CEngine`
+1. `cd /path/to/projects; git clone git@github.com:NAVADMC/ADSM-CEngine.git`
+1. `cd /path/to/projects/ADSM-CEngine`
 1. In your favorite text editor, modify './bootstrap' to comment out the Windows aclocal line and uncomment the Linux aclocal line
 1. `sh bootstrap`
 1. `./configure --disable-debug`
