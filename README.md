@@ -16,7 +16,7 @@ Compiling on Linux isn't fully supported yet for two reasons:
 
 To compile ADSM-CEngine, you will need two system packages installed already: Python3.4.x (x64) and Git (on the system path).
 
-Python: https://www.python.org/downloads/release/python-343/
+Python: https://www.python.org/downloads/release/python-343/  
 Git: https://git-scm.com/downloads
 
 ### x86-64 Windows 7 - 10
