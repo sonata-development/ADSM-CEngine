@@ -953,16 +953,7 @@ UNT_load_unit_callback (void *data, GHashTable *dict)
           break;
         }
     }
-  if (i == production_type_names->len)
-    {
-      /* We haven't encountered this production type before; add its name to
-       * the list. */
-      g_ptr_array_add (production_type_names, g_strdup(production_type_name));
-      #if DEBUG
-        g_debug ("  adding new production type \"%s\"", production_type_name);
-      #endif
-      g_array_set_size (units->production_type_counts, production_type_names->len);
-    }
+  g_assert (i < production_type_names->len);
   /* This next assignment loses the pointer to the production type name in the
    * row returned by the query. But that is OK, because that string is owned
    * by and will be freed by the SQLite library. */
@@ -1085,9 +1076,9 @@ UNT_load_unit_callback (void *data, GHashTable *dict)
 
 
 /**
- * Retrieves one production type from the database. This function is only used
- * during a dry run to check parameters; normally production types are gathered
- * as the list of units is read in.
+ * Retrieves one production type from the database. Adds it to the production_
+ * type_names array and makes space for a count in the production_type_counts
+ * array.
  *
  * @param data pointer to a UNT_unit_list_t structure.
  * @param dict the SQL query result as a GHashTable in which key = colname,
@@ -1141,17 +1132,15 @@ UNT_load_unit_list (sqlite3 *db, gboolean production_types_only)
   units->production_types = production_types;
 #endif
 
+  sqlite3_exec_dict (db, "SELECT name FROM ScenarioCreator_productiontype ORDER BY id",
+                     UNT_load_prodtype_callback, units, &sqlerr);
+
   /* When doing a dry run to check parameters, all we need is the production
    * types, not the units. */
   if (!production_types_only)
     {
       sqlite3_exec_dict (db, "SELECT unit.id,name,latitude,longitude,initial_state,days_in_initial_state,days_left_in_initial_state,initial_size,user_notes FROM ScenarioCreator_unit unit,ScenarioCreator_productiontype prodtype where unit.production_type_id=prodtype.id",
                          UNT_load_unit_callback, units, &sqlerr);
-    }
-  else
-    {
-      sqlite3_exec_dict (db, "SELECT name FROM ScenarioCreator_productiontype ORDER BY id",
-                         UNT_load_prodtype_callback, units, &sqlerr);
     }
   if (sqlerr)
     {
